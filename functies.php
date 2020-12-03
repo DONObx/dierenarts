@@ -29,7 +29,7 @@
 				$arrDier[$row["ID"]]['naam'] = $row["naam"];
 				$sqlEigenaar = "SELECT 
 				eigenaars.ID as id_eigenaar,
-				eigenaars.fullname as eigenaar_naam,
+				eigenaars.fullname as eigenaar_naam
 				FROM dier_eigenaar
 				INNER JOIN eigenaars 
 				ON dier_eigenaar.id_eigenaar=eigenaars.ID
