@@ -1,4 +1,4 @@
-<?phpfunction maakArray($conn){
+<?php
 
 	function maakConnectie(){
 		//connectie met databank
@@ -21,7 +21,7 @@
 	function maakArray($conn){
 		//data selecteren
 		$sql = "SELECT * FROM dieren";
-		result = $conn->query($sql);
+		$result = $conn->query($sql);
 		$arrDier = array();
 		if ($result->num_rows > 0) {
 			// output data of each row
@@ -65,8 +65,8 @@
 				if ($rstAandoening->num_rows > 0) {
 					while($rowAandoening = $rstAandoening->fetch_assoc()) {
 						$arrDier[$row["ID"]]['ziektes'][$rowAandoening["id_aandoening"]] = array(
-							"ziekte" => $rowAandoening["ziekte"]
-							"beschrijving_ziekte" => $rowBehandeling["beschrijving_ziekte"]);
+							"ziekte" => $rowAandoening["ziekte"],
+							"beschrijving_ziekte" => $rowAandoening["beschrijving_ziekte"]);
 					}
 				}
 
@@ -74,7 +74,7 @@
 				if ($rstBehandeling->num_rows > 0) {
 					while($rowBehandeling = $rstBehandeling->fetch_assoc()) {
 						$arrDier[$row["ID"]]['behandelingen'][$rowBehandeling["id_behandeling"]] = array(
-							"datum_behandeling" => $rowBehandeling["datum_behandeling"]
+							"datum_behandeling" => $rowBehandeling["datum_behandeling"],
 							"behandeling" => $rowBehandeling["behandeling"]);
 					}
 				}
@@ -127,15 +127,23 @@
 						<input type='text' class='form-control' id='naam' name='naam' value='{$arrDier[$idCurrentDier]['naam']}'>
 					</div>
 				</div>
-			</div>
-			<div class='col-12'>
-				<h2>Eigenaar</h2>
-			</div>
-			<div class='col-12'>
-				<h2>Ziekte</h2>
-			</div>
-			<div class='col-12'>
-				<h2>Behandeling</h2>
+				<div class='col-12'>
+					<h2>Eigenaars</h2>
+				</div>
+				<div class='col-6'>
+					<div class='form-group'>";
+					foreach ($arrDier as $key => $value) {
+						<label for='eigenaar_naam'>eigenaar naam</label>
+						<input type='text' class='form-control' id='eigenaar_naam' name='eigenaar_naam' value='{$arrDier[$idCurrentDier][ID]['eigenaar_naam']}'>
+					</div>
+					}
+				$returnString .= "</div>
+				<div class='col-12'>
+					<h2>Ziekte</h2>
+				</div>
+				<div class='col-12'>
+					<h2>Behandeling</h2>
+				</div>
 			</div><hr>";
 			
 		}else{

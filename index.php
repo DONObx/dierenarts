@@ -5,6 +5,7 @@ include 'functies.php';
 $conn = maakConnectie();
 
 $arrDier = maakArray($conn);
+print_r($arrDier);
 
 $idCurrentDier = NULL;
 if(isset($_GET['idCurrentDier'])){
