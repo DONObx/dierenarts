@@ -131,13 +131,11 @@
 					<h2>Eigenaars</h2>
 				</div>
 				<div class='col-6'>
-					<div class='form-group'>";
-					foreach ($arrDier as $key => $value) {
+					<div class='form-group'>
 						<label for='eigenaar_naam'>eigenaar naam</label>
-						<input type='text' class='form-control' id='eigenaar_naam' name='eigenaar_naam' value='{$arrDier[$idCurrentDier][ID]['eigenaar_naam']}'>
+						<input type='text' class='form-control' id='eigenaar_naam' name='eigenaar_naam' value='{$arrDier[$idCurrentDier]['eigenaar_naam']}'>
 					</div>
-					}
-				$returnString .= "</div>
+				</div>
 				<div class='col-12'>
 					<h2>Ziekte</h2>
 				</div>
@@ -160,6 +158,12 @@
 			<div class='col-12'>
 				<h2>Eigenaar</h2>
 			</div>
+				<div class='col-6'>
+					<div class='form-group'>
+						<label for='eigenaar_naam'>eigenaar naam</label>
+						<input type='text' class='form-control' id='eigenaar_naam' name='eigenaar_naam' value='{$arrDier[$idCurrentDier]['eigenaar_naam']}'>
+					</div>
+				</div>
 			<div class='col-12'>
 				<h2>Ziekte</h2>
 			</div>
