@@ -39,10 +39,10 @@
 				aandoeningen.ID as id_aandoening,
 				aandoeningen.ziekte as ziekte,
 				aandoeningen.beschrijving as beschrijving_ziekte
-				FROM dieren
+				FROM dier_aandoening
 				INNER JOIN aandoeningen
-				ON dieren.ID=aandoeningen.id_dier
-				WHERE dieren.ID =".$row["ID"];
+				ON dier_aandoening.id_aandoening=aandoeningen.ID
+				WHERE dier_aandoening.id_dier =".$row["ID"];
 
 				$sqlBehandeling = "SELECT
 				behandelingen.ID as id_behandeling,
@@ -51,7 +51,7 @@
 				FROM aandoeningen
 				INNER JOIN behandelingen
 				ON aandoeningen.ID=behandelingen.id_ziekte
-				WHERE aandoeningen.id_dier =".$row["ID"];
+				WHERE behandelingen.id_dier =".$row["ID"];
 				
 				$rstEigenaar = $conn->query($sqlEigenaar);
 				if ($rstEigenaar->num_rows > 0) {
@@ -131,16 +131,38 @@
 					<h2>Eigenaars</h2>
 				</div>
 				<div class='col-6'>
-					<div class='form-group'>
-						<label for='eigenaar_naam'>eigenaar naam</label>
-						<input type='text' class='form-control' id='eigenaar_naam' name='eigenaar_naam' value='{$arrDier[$idCurrentDier]['eigenaar_naam']}'>
-					</div>
+					<div class='form-group'>";
+					foreach ($arrDier[$idCurrentDier]['eigenaars'] as $idEigenaar => $gegvensEigenaar) {
+						$returnString .= "<label for='eigenaar_naam'>naam</label>
+						<input type='text' class='form-control' id='eigenaar$idEigenaar' name='eigenaar$idEigenaar' value='{$gegvensEigenaar['eigenaar_naam']}'>";
+					};
+				$returnString .= "</div>
 				</div>
 				<div class='col-12'>
 					<h2>Ziekte</h2>
 				</div>
+				<div class='col-6'>
+					<div class='form-group'>";
+					foreach ($arrDier[$idCurrentDier]['ziektes'] as $idZiekte => $gegvensZiekte) {
+						$returnString .= "<label for='ziekte'>aandoening</label>
+						<input type='text' class='form-control' id='aandoening$idZiekte' name='aandoening$idZiekte' value='{$gegvensZiekte['ziekte']}'>
+						<label for='beschrijving_ziekte'>beschrijving</label>
+						<input type='text' class='form-control' id='aandoening$idZiekte' name='aandoening$idZiekte' value='{$gegvensZiekte['beschrijving_ziekte']}'>";
+					};
+					$returnString .= "</div>
+				</div>
 				<div class='col-12'>
 					<h2>Behandeling</h2>
+				</div>
+				<div class='col-10'>
+					<div class='form-group'>";
+					foreach ($arrDier[$idCurrentDier]['behandelingen'] as $idBehandeling => $gegvensBehandeling) {
+						$returnString .= "<label for='datum_behandeling'>datum</label>
+						<input type='text' class='form-control' id='behandeling$idBehandeling' name='behandeling$idBehandeling' value='{$gegvensBehandeling['datum_behandeling']}'>
+						<label for='behandeling'>behandeling</label>
+						<input type='text' class='form-control' id='behandeling$idBehandeling' name='behandeling$idBehandeling' value='{$gegvensBehandeling['behandeling']}'>";
+					};
+					$returnString .= "</div>
 				</div>
 			</div><hr>";
 			
@@ -159,17 +181,39 @@
 				<h2>Eigenaar</h2>
 			</div>
 				<div class='col-6'>
-					<div class='form-group'>
-						<label for='eigenaar_naam'>eigenaar naam</label>
-						<input type='text' class='form-control' id='eigenaar_naam' name='eigenaar_naam' value='{$arrDier[$idCurrentDier]['eigenaar_naam']}'>
-					</div>
+					<div class='form-group'>";
+					foreach ($arrDier[$idCurrentDier]['eigenaars'] as $idEigenaar => $gegvensEigenaar) {
+						$returnString .= "<label for='eigenaar_naam'>naam</label>
+						<input type='text' class='form-control' id='eigenaar$idEigenaar' name='eigenaar$idEigenaar' value=''>";
+					};
+					$returnString .= "</div>
 				</div>
 			<div class='col-12'>
 				<h2>Ziekte</h2>
 			</div>
+				<div class='col-6'>
+					<div class='form-group'>";
+					foreach ($arrDier[$idCurrentDier]['aandoeningen'] as $idZiekte => $gegvensZiekte) {
+						$returnString .= "<label for='ziekte'>aandoening</label>
+						<input type='text' class='form-control' id='aandoening$idZiekte' name='aandoening$idZiekte' value=''>
+						<label for='beschrijving_ziekte'>beschrijving</label>
+						<input type='text' class='form-control' id='aandoening$idZiekte' name='aandoening$idZiekte' value=''>";
+					};
+					$returnString .= "</div>
+				</div>
 			<div class='col-12'>
 				<h2>Behandeling</h2>
-			</div><hr>";
+			</div>
+				<div class='col-10'>
+					<div class='form-group'>";
+					foreach ($arrDier[$idCurrentDier]['behandelingen'] as $idBehandeling => $gegvensBehandeling) {
+						$returnString .= "<label for='datum_behandeling'>datum</label>
+						<input type='text' class='form-control' id='behandeling$idBehandeling' name='behandeling$idBehandeling' value=''>
+						<label for='behandeling'>behandeling</label>
+						<input type='text' class='form-control' id='behandeling$idBehandeling' name='behandeling$idBehandeling' value=''>";
+					};
+					$returnString .= "</div>
+				</div><hr>";
 		}
 		return $returnString;
 	}
