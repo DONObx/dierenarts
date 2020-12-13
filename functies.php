@@ -147,7 +147,7 @@
 						$returnString .= "<label for='ziekte'>aandoening</label>
 						<input type='text' class='form-control' id='aandoening$idZiekte' name='aandoening$idZiekte' value='{$gegvensZiekte['ziekte']}'>
 						<label for='beschrijving_ziekte'>beschrijving</label>
-						<input type='text' class='form-control' id='aandoening$idZiekte' name='aandoening$idZiekte' value='{$gegvensZiekte['beschrijving_ziekte']}'>";
+						<input type='text' class='form-control' id='beschrijving$idZiekte' name='beschrijving$idZiekte' value='{$gegvensZiekte['beschrijving_ziekte']}'>";
 					};
 					$returnString .= "</div>
 				</div>
@@ -158,7 +158,7 @@
 					<div class='form-group'>";
 					foreach ($arrDier[$idCurrentDier]['behandelingen'] as $idBehandeling => $gegvensBehandeling) {
 						$returnString .= "<label for='datum_behandeling'>datum</label>
-						<input type='text' class='form-control' id='behandeling$idBehandeling' name='behandeling$idBehandeling' value='{$gegvensBehandeling['datum_behandeling']}'>
+						<input type='date' class='form-control' id='datum$idBehandeling' name='datum$idBehandeling' value='{$gegvensBehandeling['datum_behandeling']}'>
 						<label for='behandeling'>behandeling</label>
 						<input type='text' class='form-control' id='behandeling$idBehandeling' name='behandeling$idBehandeling' value='{$gegvensBehandeling['behandeling']}'>";
 					};
@@ -197,7 +197,7 @@
 						$returnString .= "<label for='ziekte'>aandoening</label>
 						<input type='text' class='form-control' id='aandoening$idZiekte' name='aandoening$idZiekte' value=''>
 						<label for='beschrijving_ziekte'>beschrijving</label>
-						<input type='text' class='form-control' id='aandoening$idZiekte' name='aandoening$idZiekte' value=''>";
+						<input type='text' class='form-control' id='beschrijving$idZiekte' name='beschrijving$idZiekte' value=''>";
 					};
 					$returnString .= "</div>
 				</div>
@@ -208,7 +208,7 @@
 					<div class='form-group'>";
 					foreach ($arrDier[$idCurrentDier]['behandelingen'] as $idBehandeling => $gegvensBehandeling) {
 						$returnString .= "<label for='datum_behandeling'>datum</label>
-						<input type='text' class='form-control' id='behandeling$idBehandeling' name='behandeling$idBehandeling' value=''>
+						<input type='date' class='form-control' id='datum$idBehandeling' name='datum$idBehandeling' value=''>
 						<label for='behandeling'>behandeling</label>
 						<input type='text' class='form-control' id='behandeling$idBehandeling' name='behandeling$idBehandeling' value=''>";
 					};
