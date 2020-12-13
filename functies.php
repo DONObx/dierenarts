@@ -168,52 +168,47 @@
 			
 		}else{
 			$returnString = PHP_EOL . "<div class='row'>
-				<div class='col-12'>
-					<h2>Dier</h2>
+			<div class='col-12'>
+				<h2>Dier</h2>
+			</div>
+			<div class='col-6'>
+				<div class='form-group'>
+					<label for='naam'>naam</label>
+					<input type='text' class='form-control' id='naam' name='naam' value=''>
 				</div>
-				<div class='col-6'>
-					<div class='form-group'>
-						<label for='naam'>naam</label>
-						<input type='text' class='form-control' id='naam' name='naam' value=''>
-					</div>
-				</div>
+			</div>
 			<div class='col-12'>
 				<h2>Eigenaar</h2>
 			</div>
 				<div class='col-6'>
-					<div class='form-group'>";
-					foreach ($arrDier[$idCurrentDier]['eigenaars'] as $idEigenaar => $gegvensEigenaar) {
-						$returnString .= "<label for='eigenaar_naam'>naam</label>
-						<input type='text' class='form-control' id='eigenaar$idEigenaar' name='eigenaar$idEigenaar' value=''>";
-					};
-					$returnString .= "</div>
+					<div class='form-group'>
+						<label for='eigenaar_naam'>naam</label>
+						<input type='text' class='form-control' id='eigenaar' name='eigenaar' value=''>
+					</div>
 				</div>
 			<div class='col-12'>
 				<h2>Ziekte</h2>
 			</div>
 				<div class='col-6'>
-					<div class='form-group'>";
-					foreach ($arrDier[$idCurrentDier]['aandoeningen'] as $idZiekte => $gegvensZiekte) {
-						$returnString .= "<label for='ziekte'>aandoening</label>
-						<input type='text' class='form-control' id='aandoening$idZiekte' name='aandoening$idZiekte' value=''>
+					<div class='form-group'>
+						<label for='ziekte'>aandoening</label>
+						<input type='text' class='form-control' id='aandoening' name='aandoening' value=''>
 						<label for='beschrijving_ziekte'>beschrijving</label>
-						<input type='text' class='form-control' id='beschrijving$idZiekte' name='beschrijving$idZiekte' value=''>";
-					};
-					$returnString .= "</div>
+						<input type='text' class='form-control' id='beschrijving' name='beschrijving' value=''>
+					</div>
 				</div>
 			<div class='col-12'>
 				<h2>Behandeling</h2>
 			</div>
 				<div class='col-10'>
-					<div class='form-group'>";
-					foreach ($arrDier[$idCurrentDier]['behandelingen'] as $idBehandeling => $gegvensBehandeling) {
-						$returnString .= "<label for='datum_behandeling'>datum</label>
-						<input type='date' class='form-control' id='datum$idBehandeling' name='datum$idBehandeling' value=''>
+					<div class='form-group'>
+					<label for='datum_behandeling'>datum</label>
+						<input type='date' class='form-control' id='datum' name='datum' value=''>
 						<label for='behandeling'>behandeling</label>
-						<input type='text' class='form-control' id='behandeling$idBehandeling' name='behandeling$idBehandeling' value=''>";
-					};
-					$returnString .= "</div>
-				</div><hr>";
+						<input type='text' class='form-control' id='behandeling' name='behandeling' value=''>
+					</div>
+				</div>
+		</div><hr>";
 		}
 		return $returnString;
 	}

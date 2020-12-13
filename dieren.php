@@ -1,7 +1,20 @@
 <?php
+	include 'functies.php';
+	include 'index.php';
 
+	$conn = maakConnectie();
+
+	$arrDier = maakArray($conn);
+
+	$idCurrentDier = NULL;
+	if(isset($_GET['idCurrentDier'])){
+		$idCurrentDier = $_GET['idCurrentDier'];
+	}
+	
+	function addDier(){
+
+	}
 ?>
-
 <!doctype html>
 <html lang="nl">
   <head>
@@ -39,6 +52,9 @@
 						<input type="text" class="form-control" id="diersoort" name="diersoort">
 						<label for="ras">ras</label>
 						<input type="text" class="form-control" id="ras" name="ras">
+					</div>
+					<div class="d-grid gap-2 col-6 mx-auto">
+					  <button class="btn btn-primary" type="button"><i class='fa fa-plus'></i> Voeg nieuw dier</button>
 					</div>
 				</div>
 			</div><hr>

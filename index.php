@@ -22,10 +22,10 @@ if(isset($_GET['actie'])){
 if($idCurrentDier != NULL && $actie=="updateDier"){
 	$sql = "UPDATE dieren, eigenaars, aandoeningen, behandelingen SET 
 	naam = '{$_GET['naam']}', 
-	eigenaar_naam = '{$_GET['eigenaar_naam']}', 
-	ziekte = '{$_GET['ziekte']}', 
-	beschrijving_ziekte = '{$_GET['beschrijving_ziekte']}',
-	datum_behandeling =' {$_GET['datum_behandeling']}',
+	eigenaar_naam = '{$_GET['eigenaar']}', 
+	ziekte = '{$_GET['aandoening']}', 
+	beschrijving_ziekte = '{$_GET['beschrijving']}',
+	datum_behandeling =' {$_GET['datum']}',
 	behandeling =' {$_GET['behandeling']}'
 	WHERE id = $idCurrentDier";
 	if ($conn->query($sql) === TRUE) {
@@ -35,9 +35,9 @@ if($idCurrentDier != NULL && $actie=="updateDier"){
 	}
 }elseif(isset($_GET['naam']) && $actie=="newDier"){
 	$sql = "INSERT INTO dieren (naam) VALUES ('{$_GET['naam']}')
-			INSERT INTO eigenaars (eigenaar_naam) VALUES ('{$_GET['eigenaar_naam']}')
-			INSERT INTO aandoeningen (ziekte, beschrijving_ziekte) VALUES ('{$_GET['ziekte']}', '{$_GET['beschrijving_ziekte']}')
-			INSERT INTO behandelingen (datum_behandeling, behandeling) VALUES ('{$_GET['datum_behandeling']}', '{$_GET['behandeling']}')";
+			INSERT INTO eigenaars (fullname) VALUES ('{$_GET['eigenaar']}')
+			INSERT INTO aandoeningen (ziekte, beschrijving_ziekte) VALUES ('{$_GET['aandoening']}', '{$_GET['beschrijving']}')
+			INSERT INTO behandelingen (datum_behandeling, behandeling) VALUES ('{$_GET['datum']}', '{$_GET['behandeling']}')";
 
 	if ($conn->query($sql) === TRUE) {
 	  $idCurrentDier = $conn->insert_id;
@@ -75,9 +75,11 @@ if($idCurrentDier != NULL && $actie=="updateDier"){
 			<?php print kiesDier($arrDier,$idCurrentDier); ?>
 			<?php print formDier($arrDier,$idCurrentDier); ?>
 			<?php print buttonBar($idCurrentDier) ?>
-
+			<div class="btn-group">
+			  <a href="dieren.php" class="btn btn-primary"><i class='fa fa-plus'></i> Voeg nieuw dier</a>
+			  <a href="eigenaars.php" class="btn btn-primary"><i class='fa fa-plus'></i> Voeg nieuw eigenaar</a>
+			</div>
 		</div>
-	
 	</form>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
