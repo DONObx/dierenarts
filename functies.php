@@ -27,6 +27,9 @@
 			// output data of each row
 			while($row = $result->fetch_assoc()) {
 				$arrData[$row["ID"]]['naam'] = $row["naam"];
+				$arrData[$row["ID"]]['geboortedatum'] = $row["geboortedatum"];
+				$arrData[$row["ID"]]['diersoort'] = $row["diersoort"];
+				$arrData[$row["ID"]]['ras'] = $row["ras"];
 				$sqlEigenaar = "SELECT 
 				eigenaars.ID as id_eigenaar,
 				eigenaars.fullname as eigenaar_naam
@@ -126,6 +129,20 @@
 						<label for='naam'>naam</label>
 						<input type='text' class='form-control' id='naam' name='naam' value='{$arrData[$idCurrentDier]['naam']}'>
 					</div>
+					<div class='form-group'>
+						<label for='geboortedatum'>geboortedatum</label>
+						<input type='date' class='form-control' id='geboortedatum' name='geboortedatum' value='{$arrData[$idCurrentDier]['geboortedatum']}'>
+					</div>
+				</div>	
+				<div class='col-6'>
+					<div class='form-group'>
+						<label for='diersoort'>diersoort</label>
+						<input type='text' class='form-control' id='diersoort' name='diersoort' value='{$arrData[$idCurrentDier]['diersoort']}'>
+					</div>
+					<div class='form-group'>
+						<label for='ras'>ras</label>
+						<input type='text' class='form-control' id='ras' name='ras' value='{$arrData[$idCurrentDier]['ras']}'>
+					</div>
 				</div>
 				<div class='col-12'>
 					<h2>Eigenaars</h2>
@@ -175,6 +192,20 @@
 				<div class='form-group'>
 					<label for='naam'>naam</label>
 					<input type='text' class='form-control' id='naam' name='naam' value=''>
+				</div>
+				<div class='form-group'>
+					<label for='geboortedatum'>geboortedatum</label>
+					<input type='date' class='form-control' id='geboortedatum' name='geboortedatum' value=''>
+				</div>
+			</div>	
+			<div class='col-6'>
+				<div class='form-group'>
+					<label for='diersoort'>diersoort</label>
+					<input type='text' class='form-control' id='diersoort' name='diersoort' value=''>
+				</div>
+				<div class='form-group'>
+					<label for='ras'>ras</label>
+					<input type='text' class='form-control' id='ras' name='ras' value=''>
 				</div>
 			</div>
 			<div class='col-12'>

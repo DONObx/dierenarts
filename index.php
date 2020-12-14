@@ -21,12 +21,12 @@ if(isset($_GET['actie'])){
 
 if($idCurrentDier != NULL && $actie=="updateDier"){
 	$sql = "UPDATE dieren, eigenaars, aandoeningen, behandelingen SET 
-	naam = '{$_GET['naam']}', 
-	eigenaar_naam = '{$_GET['eigenaar']}', 
-	ziekte = '{$_GET['aandoening']}', 
-	beschrijving_ziekte = '{$_GET['beschrijving']}',
-	datum_behandeling =' {$_GET['datum']}',
-	behandeling =' {$_GET['behandeling']}'
+	dieren.naam = '{$_GET['naam']}', 
+	eigenaars.eigenaar_naam = '{$_GET['eigenaar']}', 
+	aandoeningen.ziekte = '{$_GET['aandoening']}', 
+	aandoeningen.beschrijving_ziekte = '{$_GET['beschrijving']}',
+	behandelingen.datum_behandeling =' {$_GET['datum']}',
+	behandelingen.behandeling =' {$_GET['behandeling']}'
 	WHERE id = $idCurrentDier";
 	if ($conn->query($sql) === TRUE) {
 	  $arrData = maakArray1($conn);
