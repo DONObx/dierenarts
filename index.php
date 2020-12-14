@@ -4,8 +4,8 @@ include 'functies.php';
 
 $conn = maakConnectie();
 
-$arrDier = maakArray($conn);
-//print_r($arrDier);
+$arrData = maakArray1($conn);
+//print_r($arrData);
 
 $idCurrentDier = NULL;
 if(isset($_GET['idCurrentDier'])){
@@ -29,7 +29,7 @@ if($idCurrentDier != NULL && $actie=="updateDier"){
 	behandeling =' {$_GET['behandeling']}'
 	WHERE id = $idCurrentDier";
 	if ($conn->query($sql) === TRUE) {
-	  $arrDier = maakArray($conn);
+	  $arrData = maakArray1($conn);
 	} else {
 	  echo "Error updating record: " . $conn->error;
 	}
@@ -41,7 +41,7 @@ if($idCurrentDier != NULL && $actie=="updateDier"){
 
 	if ($conn->query($sql) === TRUE) {
 	  $idCurrentDier = $conn->insert_id;
-	  $arrDier = maakArray($conn);
+	  $arrData = maakArray1($conn);
 	} else {
 	  echo "Error: " . $sql . "<br>" . $conn->error;
 	}
@@ -72,12 +72,11 @@ if($idCurrentDier != NULL && $actie=="updateDier"){
 				</div>
 			</div>
 			<hr>
-			<?php print kiesDier($arrDier,$idCurrentDier); ?>
-			<?php print formDier($arrDier,$idCurrentDier); ?>
-			<?php print buttonBar($idCurrentDier) ?>
+			<?php print kiesData($arrData,$idCurrentDier); ?>
+			<?php print formData($arrData,$idCurrentDier); ?>
 			<div class="btn-group">
-			  <a href="dieren.php" class="btn btn-primary"><i class='fa fa-plus'></i> Voeg nieuw dier</a>
-			  <a href="eigenaars.php" class="btn btn-primary"><i class='fa fa-plus'></i> Voeg nieuw eigenaar</a>
+			  <a href="wijzigDier.php" class="btn btn-primary"><i class='fa fa-plus'></i> Voeg nieuw dier</a>
+			  <a href="wijzigEig.php" class="btn btn-primary"><i class='fa fa-plus'></i> Voeg nieuw eigenaar</a>
 			</div>
 		</div>
 	</form>

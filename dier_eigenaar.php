@@ -1,5 +1,6 @@
 <?php
 	include 'functies.php';
+	include 'wijzigEig.php';
 
 	$conn = maakConnectie();
 

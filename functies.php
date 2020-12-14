@@ -18,15 +18,15 @@
 	}
 
 	//Array van dier maken
-	function maakArray($conn){
+	function maakArray1($conn){
 		//data selecteren
 		$sql = "SELECT * FROM dieren";
 		$result = $conn->query($sql);
-		$arrDier = array();
+		$arrData = array();
 		if ($result->num_rows > 0) {
 			// output data of each row
 			while($row = $result->fetch_assoc()) {
-				$arrDier[$row["ID"]]['naam'] = $row["naam"];
+				$arrData[$row["ID"]]['naam'] = $row["naam"];
 				$sqlEigenaar = "SELECT 
 				eigenaars.ID as id_eigenaar,
 				eigenaars.fullname as eigenaar_naam
@@ -56,7 +56,7 @@
 				$rstEigenaar = $conn->query($sqlEigenaar);
 				if ($rstEigenaar->num_rows > 0) {
 					while($rowEigenaar = $rstEigenaar->fetch_assoc()) {
-						$arrDier[$row["ID"]]['eigenaars'][$rowEigenaar["id_eigenaar"]] = array(
+						$arrData[$row["ID"]]['eigenaars'][$rowEigenaar["id_eigenaar"]] = array(
 							"eigenaar_naam" => $rowEigenaar["eigenaar_naam"]);
 					}
 				}
@@ -64,7 +64,7 @@
 				$rstAandoening = $conn->query($sqlAandoening);
 				if ($rstAandoening->num_rows > 0) {
 					while($rowAandoening = $rstAandoening->fetch_assoc()) {
-						$arrDier[$row["ID"]]['ziektes'][$rowAandoening["id_aandoening"]] = array(
+						$arrData[$row["ID"]]['ziektes'][$rowAandoening["id_aandoening"]] = array(
 							"ziekte" => $rowAandoening["ziekte"],
 							"beschrijving_ziekte" => $rowAandoening["beschrijving_ziekte"]);
 					}
@@ -73,7 +73,7 @@
 				$rstBehandeling = $conn->query($sqlBehandeling);
 				if ($rstBehandeling->num_rows > 0) {
 					while($rowBehandeling = $rstBehandeling->fetch_assoc()) {
-						$arrDier[$row["ID"]]['behandelingen'][$rowBehandeling["id_behandeling"]] = array(
+						$arrData[$row["ID"]]['behandelingen'][$rowBehandeling["id_behandeling"]] = array(
 							"datum_behandeling" => $rowBehandeling["datum_behandeling"],
 							"behandeling" => $rowBehandeling["behandeling"]);
 					}
@@ -83,19 +83,19 @@
 		} else {
 			echo "0 results";
 		}
-		return $arrDier;
+		return $arrData;
 
 	}
 
 	//Dropdown om mijn dier te selecteren
-	function kiesDier($arrDier,$idCurrentDier){
+	function kiesData($arrData,$idCurrentDier){
 		$returnString = "<div class='row'>
 				<div class='col-12'>
 					<div class='form-group'>
 						<label for='idCurrentDier'>Kies een dier</label>
 						<select class='form-control' id='idCurrentDier' name='idCurrentDier' onchange='this.form.submit()'>
 							<option value=''>---NIEUW DIER---</option>";
-		foreach($arrDier as $key => $value){
+		foreach($arrData as $key => $value){
 			$selected = NULL;
 			if($key == $idCurrentDier){
 				$selected = "SELECTED";
@@ -113,7 +113,7 @@
 	}
 
 	//Dromdown met de consult van mijn dier
-	function formDier($arrDier,$idCurrentDier){
+	function formData($arrData,$idCurrentDier){
 		$returnString = NULL;
 		if($idCurrentDier != NULL){
 			$returnString = PHP_EOL . "
@@ -124,7 +124,7 @@
 				<div class='col-6'>
 					<div class='form-group'>
 						<label for='naam'>naam</label>
-						<input type='text' class='form-control' id='naam' name='naam' value='{$arrDier[$idCurrentDier]['naam']}'>
+						<input type='text' class='form-control' id='naam' name='naam' value='{$arrData[$idCurrentDier]['naam']}'>
 					</div>
 				</div>
 				<div class='col-12'>
@@ -132,7 +132,7 @@
 				</div>
 				<div class='col-6'>
 					<div class='form-group'>";
-					foreach ($arrDier[$idCurrentDier]['eigenaars'] as $idEigenaar => $gegvensEigenaar) {
+					foreach ($arrData[$idCurrentDier]['eigenaars'] as $idEigenaar => $gegvensEigenaar) {
 						$returnString .= "<label for='eigenaar_naam'>naam</label>
 						<input type='text' class='form-control' id='eigenaar$idEigenaar' name='eigenaar$idEigenaar' value='{$gegvensEigenaar['eigenaar_naam']}'>";
 					};
@@ -143,7 +143,7 @@
 				</div>
 				<div class='col-6'>
 					<div class='form-group'>";
-					foreach ($arrDier[$idCurrentDier]['ziektes'] as $idZiekte => $gegvensZiekte) {
+					foreach ($arrData[$idCurrentDier]['ziektes'] as $idZiekte => $gegvensZiekte) {
 						$returnString .= "<label for='ziekte'>aandoening</label>
 						<input type='text' class='form-control' id='aandoening$idZiekte' name='aandoening$idZiekte' value='{$gegvensZiekte['ziekte']}'>
 						<label for='beschrijving_ziekte'>beschrijving</label>
@@ -156,7 +156,7 @@
 				</div>
 				<div class='col-10'>
 					<div class='form-group'>";
-					foreach ($arrDier[$idCurrentDier]['behandelingen'] as $idBehandeling => $gegvensBehandeling) {
+					foreach ($arrData[$idCurrentDier]['behandelingen'] as $idBehandeling => $gegvensBehandeling) {
 						$returnString .= "<label for='datum_behandeling'>datum</label>
 						<input type='date' class='form-control' id='datum$idBehandeling' name='datum$idBehandeling' value='{$gegvensBehandeling['datum_behandeling']}'>
 						<label for='behandeling'>behandeling</label>
