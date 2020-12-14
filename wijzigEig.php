@@ -206,6 +206,11 @@ VALUES ('{$_GET['fullname']}', '{$_GET['adres']}', '{$_GET['telefoonnummer']}', 
 			<?php print kiesEig($arrEig,$idCurrentEig); ?>
 			<?php print formEig($arrEig,$idCurrentEig); ?>
 			<?php print buttonBarEig($idCurrentEig) ?>
+			<div class="btn-group">
+			  <a href="index.php" class="btn btn-primary"> Overzicht dier</a>
+			  <a href="wijzigDier.php" class="btn btn-primary"><i class='fa fa-plus'></i> Voeg nieuw dier</a>
+			  <a href="dier_eigenaar.php" class="btn btn-primary"><i class='fa fa-plus'></i> combineer dier en eigenaar</a>
+			</div>
 		</div>
 	</form>
     <!-- Optional JavaScript -->

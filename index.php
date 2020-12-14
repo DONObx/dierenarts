@@ -77,6 +77,7 @@ if($idCurrentDier != NULL && $actie=="updateDier"){
 			<div class="btn-group">
 			  <a href="wijzigDier.php" class="btn btn-primary"><i class='fa fa-plus'></i> Voeg nieuw dier</a>
 			  <a href="wijzigEig.php" class="btn btn-primary"><i class='fa fa-plus'></i> Voeg nieuw eigenaar</a>
+			  <a href="dier_eigenaar.php" class="btn btn-primary"><i class='fa fa-plus'></i> combineer dier en eigenaar</a>
 			</div>
 		</div>
 	</form>

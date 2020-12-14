@@ -1,33 +1,44 @@
 <?php
 	include 'functies.php';
-	include 'wijzigEig.php';
 
 	$conn = maakConnectie();
 
-	$arrDier = maakArray($conn);
+$arrData = maakArray1($conn);
 
-	function maakArray2($conn){
-	$sql = "SELECT * FROM eigenaars";
+	$arrEig = maakArray($conn);
+	function maakArray($conn){
+		//data selecteren
+		$sql = "SELECT * FROM eigenaars";
 		$result = $conn->query($sql);
-		$arrEigenaar = array();
-	return $arrEigenaar;
-	}
+		$arrEig = array();
+		if ($result->num_rows > 0) {
+			// output data of each row
+			while($row = $result->fetch_assoc()) {
+				$arrEig[$row["ID"]]['fullname'] = $row["fullname"];
+				$arrEig[$row["ID"]]['adres'] = $row["adres"];
+				$arrEig[$row["ID"]]['telefoonnummer'] = $row["telefoonnummer"];
+				$arrEig[$row["ID"]]['email_adres'] = $row["email_adres"];
+			}	
+		} else {
+			echo "0 results";
+		}
+		return $arrEig;
 
-	$arrEigenaar = maakArray2($conn);
+	}
 
 	$idCurrentDier = NULL;
 	if(isset($_GET['idCurrentDier'])){
 		$idCurrentDier = $_GET['idCurrentDier'];
 	}
 
-	function kiesEigenaar($arrEigenaar,$idCurrentEigenaar){
+	function kiesEigenaar($arrEig,$idCurrentEigenaar){
 		$returnString = "<div class='row'>
 				<div class='col-12'>
 					<div class='form-group'>
 						<label for='idCurrentEigenaar'>Kies een eigenaar</label>
 						<select class='form-control' id='idCurrentEigenaar' name='idCurrentEigenaar' onchange='this.form.submit()'>
 							<option value=''>---EIGENAAR---</option>";
-		foreach($arrEigenaar as $key => $value){
+		foreach($arrEig as $key => $value){
 			$selected = NULL;
 			if($key == $idCurrentEigenaar){
 				$selected = "SELECTED";
@@ -74,11 +85,13 @@
 				</div>
 				<div class="col-6">
 					<div class="form-group">
-						<?php print kiesDier($arrDier,$idCurrentDier); ?>
-						<?php print kiesEigenaar($arrDier,$idCurrentDier); ?>
+						<?php print kiesData($arrData,$idCurrentDier); ?>
+						<?php print kiesEigenaar($arrEig,$idCurrentEigenaar); ?>
 					</div>
-					<div class="d-grid gap-2 col-6 mx-auto">
-					  <button class="btn btn-primary" type="submit"><i class='fa fa-plus'></i> Voeg nieuw dier</button>
+					<div class="btn-group">
+					  <a href="wijzigDier.php" class="btn btn-primary"><i class='fa fa-plus'></i> Voeg nieuw dier</a>
+					  <a href="wijzigEig.php" class="btn btn-primary"><i class='fa fa-plus'></i> Voeg nieuw eigenaar</a>
+					  <a href="index.php" class="btn btn-primary"> overzicht dier</a>
 					</div>
 				</div>
 			</div><hr>

@@ -49,7 +49,7 @@
 		return $returnString;
 	}
 
-		//Dromdown met de gegevens van mijn dier
+	//Dromdown met de gegevens van mijn dier
 	function formDier($arrDier,$idCurrentDier){
 		$returnString = NULL;
 		if($idCurrentDier != NULL){
@@ -139,7 +139,6 @@
 		return $returnString;
 	}
 
-$conn = maakConnectie();
 
 $arrDier = maakArray($conn);
 
@@ -206,6 +205,11 @@ VALUES ('{$_GET['naam']}', '{$_GET['geboortedatum']}', '{$_GET['diersoort']}', '
 			<?php print kiesDier($arrDier,$idCurrentDier); ?>
 			<?php print formDier($arrDier,$idCurrentDier); ?>
 			<?php print buttonBarDier($idCurrentDier) ?>
+			<div class="btn-group">
+			  <a href="index.php" class="btn btn-primary"> Overzicht dier</a>
+			  <a href="wijzigEig.php" class="btn btn-primary"><i class='fa fa-plus'></i> Voeg nieuw eigenaar</a>
+			  <a href="dier_eigenaar.php" class="btn btn-primary"><i class='fa fa-plus'></i> combineer dier en eigenaar</a>
+			</div>
 		</div>
 	</form>
     <!-- Optional JavaScript -->
