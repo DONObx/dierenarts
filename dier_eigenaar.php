@@ -4,36 +4,44 @@
 	$conn = maakConnectie();
 
 	$arrDier = maakArray($conn);
-	//print_r($arrDier);
+
+	function maakArray2($conn){
+	$sql = "SELECT * FROM eigenaars";
+		$result = $conn->query($sql);
+		$arrEigenaar = array();
+	return $arrEigenaar;
+	}
+
+	$arrEigenaar = maakArray2($conn);
 
 	$idCurrentDier = NULL;
 	if(isset($_GET['idCurrentDier'])){
 		$idCurrentDier = $_GET['idCurrentDier'];
 	}
 
-		if(isset($_GET['naam'])){
-            $naam = $_GET['naam'];
-        }else{
-            $naam = "";
-        }
-        if(isset($_GET['geboortedatum'])){
-            $geboortedatum = $_GET['geboortedatum'];
-        }else{
-            $geboortedatum = "";
-        }
-        if(isset($_GET['diersoort'])){
-            $diersoort = $_GET['diersoort'];
-        }else{
-            $diersoort = "";
-        }
-        if(isset($_GET['ras'])){
-            $ras = $_GET['ras'];
-        }else{
-            $ras = "";
-        }
-
-        $sql = "INSERT INTO dieren (naam,geboortedatum,diersoort,ras) VALUES ('$naam','$geboortedatum','$diersoort','$ras')";
-        $result = $conn->query($sql);
+	function kiesEigenaar($arrEigenaar,$idCurrentEigenaar){
+		$returnString = "<div class='row'>
+				<div class='col-12'>
+					<div class='form-group'>
+						<label for='idCurrentEigenaar'>Kies een eigenaar</label>
+						<select class='form-control' id='idCurrentEigenaar' name='idCurrentEigenaar' onchange='this.form.submit()'>
+							<option value=''>---EIGENAAR---</option>";
+		foreach($arrEigenaar as $key => $value){
+			$selected = NULL;
+			if($key == $idCurrentEigenaar){
+				$selected = "SELECTED";
+			}
+			  $returnString .="
+							<option value='$key' $selected >{$value['eigenaar_naam']}</option>";
+		}
+		$returnString .= "
+						</select>
+					</div>
+				</div>
+			</div>
+			<hr>";
+		return $returnString;
+	}
 	
 ?>
 <!doctype html>
@@ -65,14 +73,8 @@
 				</div>
 				<div class="col-6">
 					<div class="form-group">
-						<label for="naam">naam</label>
-						<input type="text" class="form-control" id="naam" name="naam">
-						<label for="geboortedatum">geboortedatum</label>
-						<input type="date" class="form-control" id="geboortedatum" name="geboortedatum">
-						<label for="diersoort">diersoort</label>
-						<input type="text" class="form-control" id="diersoort" name="diersoort">
-						<label for="ras">ras</label>
-						<input type="text" class="form-control" id="ras" name="ras">
+						<?php print kiesDier($arrDier,$idCurrentDier); ?>
+						<?php print kiesEigenaar($arrDier,$idCurrentDier); ?>
 					</div>
 					<div class="d-grid gap-2 col-6 mx-auto">
 					  <button class="btn btn-primary" type="submit"><i class='fa fa-plus'></i> Voeg nieuw dier</button>
